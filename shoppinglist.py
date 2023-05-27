@@ -1,5 +1,5 @@
 #Flask Klassen importieren
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 
 #instanzieren der Klasse mit argument für Module/Packete, app variable
 app = Flask(__name__)
@@ -12,8 +12,3 @@ def start_page():
 @app.route("/add.html")
 def add_page():
     return render_template('add.html')
-
-@app.route("/add_entry", methods = ['POST'])
-def add_entry():
-    print(request.json)
-    return " "
