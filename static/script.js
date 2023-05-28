@@ -12,6 +12,8 @@ function loadShoppinglist(key){
   }
 }
 
+
+
 function checkbox(i){
   var boxstate = document.getElementById("list-checkbox-" + i).checked;
   var boxitem = document.getElementById("list-item-" + i);
@@ -39,14 +41,20 @@ function add(value,i){
 `;
 }
 
+//Artikel einfügen
 function addShoppinglist(){
-  add(shoppinglistfield.value);
-  
-    // Liste wird gespeichert auf dem Webbroser
-    saveShoppinglist.push(shoppinglistfield.value); //Speichert den Wert aus Textbox in die variable saveShoppinglist in einem Arry
-    save();
-    
-     //Textfeld wird geleert
+  //Post-Methode, Daten von Browser zu Server versenden
+    fetch("/add_entry", {
+        method: "POST",
+        body: JSON.stringify({
+            Artikel: shoppinglistfield.value
+        }),
+        headers:{
+            "Content-type": "application/json; charset= UTF-8"
+        }
+    });
+
+    //Textfeld wird geleert
     shoppinglistfield.value ='';
 }
 

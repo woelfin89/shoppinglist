@@ -41,9 +41,20 @@
             <!-- Your content goes here -->
             <!--so bald Formular abgesendet wird, wird eine JS-Funktion namens "addTodo" aufgerufen-->
             <form onsubmit="addShoppinglist(); return false">
+                <!-- Artikelfeld -->
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="text" id="shoppinglistfield">
                   <label class="mdl-textfield__label" for="shoppinglistfield">Artikel einfügen</label>
+                </div>
+                <!-- Mengenfeld -->
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="amount_field">
+                  <label class="mdl-textfield__label" for="amount_field">Menge einfügen</label>
+                </div>
+                <!-- Preisfeld -->
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="price_field">
+                  <label class="mdl-textfield__label" for="price_field">Preis einfügen</label>
                 </div>
 
                 <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
