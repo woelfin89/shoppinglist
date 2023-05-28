@@ -25,6 +25,7 @@ function checkbox(i){
   }
 }
 
+//Liste Browser erzeugen
 function add(value,i){
   shoppinglist.innerHTML +=`
   <li class="mdl-list__item" id="list-item-${i}">
@@ -47,7 +48,9 @@ function addShoppinglist(){
     fetch("/add_entry", {
         method: "POST",
         body: JSON.stringify({
-            Artikel: shoppinglistfield.value
+            Artikel: shoppinglistfield.value,
+            Menge: amount_field.value,
+            Preis: price_field.value
         }),
         headers:{
             "Content-type": "application/json; charset= UTF-8"
@@ -55,7 +58,9 @@ function addShoppinglist(){
     });
 
     //Textfeld wird geleert
-    shoppinglistfield.value ='';
+    shoppinglistfield.value =''
+    amount_field.value =''
+    price_field.value ='';
 }
 
 function save(){
