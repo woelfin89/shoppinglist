@@ -1,0 +1,26 @@
+{
+  "": {
+    "article": "",
+    "amount": "",
+    "checked": null,
+    "price": ""
+  },
+  "test": {
+    "article": "test",
+    "amount": "2",
+    "checked": null,
+    "price": "33"
+  },
+  "g": {
+    "article": "g",
+    "amount": "2",
+    "checked": null,
+    "price": "33"
+  },
+  "a": {
+    "article": "a",
+    "amount": "a",
+    "checked": null,
+    "price": "a"
+  }
+}

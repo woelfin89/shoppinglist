@@ -3,18 +3,30 @@ var saveShoppinglist = JSON.parse(localStorage.getItem('ShoppinglistData')) || [
 window.onload = loadShoppinglist();
 
 function loadShoppinglist(key){
-  var list = document.getElementById("shoppinglist");
-  console.log(list);
-  for (var i = 0, len=saveShoppinglist.length; i<len; i++){
-    var key = saveShoppinglist[i];
+    fetch("/add_entry", {
+        method: "GET",
+        body: JSON.stringify({
+            Artikel: shoppinglistfield.value,
+            Menge: amount_field.value,
+            Preis: price_field.value
+        }),
+        headers:{
+            "Content-type": "application/json; charset= UTF-8"
+        }
+    });
+  //var list = document.getElementById("shoppinglist");
+  //console.log(list);
+  //for (var i = 0, len=saveShoppinglist.length; i<len; i++){
+  //  var key = saveShoppinglist[i];
     
-    add(key,i);
-  }
+  //  add(key,i);
+  //}
+  localStorage.clear()
 }
 
 
 
-function checkbox(i){
+/*function checkbox(i){
   var boxstate = document.getElementById("list-checkbox-" + i).checked;
   var boxitem = document.getElementById("list-item-" + i);
 
@@ -23,7 +35,7 @@ function checkbox(i){
     saveShoppinglist.splice(i,1);
     save();
   }
-}
+}*/
 
 //Liste Browser erzeugen
 function add(value,i){
@@ -63,8 +75,8 @@ function addShoppinglist(){
     price_field.value ='';
 }
 
-function save(){
+/*function save(){
   localStorage.setItem('ShoppinglistData', //wird im localStorage unter "ShoppinglistData" gespeichert
   JSON.stringify(saveShoppinglist)  //Variable wird in String im JSON-Format umgewandelt
 );
-}
+}*/
