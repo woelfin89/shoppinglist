@@ -1,19 +1,23 @@
-var saveShoppinglist = JSON.parse(localStorage.getItem('ShoppinglistData')) || [];
 
 window.onload = loadShoppinglist();
 
 function loadShoppinglist(key){
-    fetch("/add_entry", {
+    fetch("/entry_list", {
         method: "GET",
-        body: JSON.stringify({
-            Artikel: shoppinglistfield.value,
-            Menge: amount_field.value,
-            Preis: price_field.value
-        }),
         headers:{
-            "Content-type": "application/json; charset= UTF-8"
+            "Accept": "application/json; charset= UTF-8"
         }
+        })
+    //response nimmt Werte des zurückgegebenen Objekts an und json() konvertiert dieses dann in JSON-Daten
+    .then(response => response.json())
+    .then((data) =>{
+        var entrys = data;
+        const map = new Map(Object.entries(entrys))
+        map.forEach(function(value,key){
+            add(value, key);
+        })
     });
+
   //var list = document.getElementById("shoppinglist");
   //console.log(list);
   //for (var i = 0, len=saveShoppinglist.length; i<len; i++){
@@ -26,32 +30,59 @@ function loadShoppinglist(key){
 
 
 
-/*function checkbox(i){
-  var boxstate = document.getElementById("list-checkbox-" + i).checked;
-  var boxitem = document.getElementById("list-item-" + i);
+function checkbox(key, boxinhalt){
+    console.log(key)
+  var boxstate = document.getElementById(key).checked;
+  var boxitem = document.getElementById(key);
+  var inhalt = document.getElementById(boxinhalt)
 
-  if (boxstate == true){
-    boxitem.remove();
-    saveShoppinglist.splice(i,1);
-    save();
-  }
-}*/
+  console.log(boxstate)
+  console.log(inhalt)
+
+    inhalt.classList.add("boxChecked");
+    fetch("/update", {
+        method: "POST",
+        body: JSON.stringify({
+            Artikel: shoppinglistfield.value,
+            Menge: amount_field.value,
+            Preis: price_field.value,
+            Checkbox: boxstate
+        }),
+        headers:{
+            "Content-type": "application/json; charset= UTF-8",
+        }
+    })
+}
 
 //Liste Browser erzeugen
-function add(value,i){
+function add(value,key){
+  //console.log(value)
+  var listenItem =document.getElementById("list-item-" + key)
+  if (listenItem != null){
+    listenItem.remove();
+  }
   shoppinglist.innerHTML +=`
-  <li class="mdl-list__item" id="list-item-${i}">
+  <li class="mdl-list__item" id="list-item-${key}">
     <span class="mdl-list__item-primary-content">
       <i class="material-icons  mdl-list__item-avatar">label</i>
-      ${value} 
+      ${value.article}
+      <span class="mdl-list__item-primary-content">
+    </span>
+    <span class="mdl-list__item-primary-content">
+      ${value.amount}
+    </span>
+        <span class="mdl-list__item-primary-content">
+      ${value.price}
     </span>
     <span class="mdl-list__item-secondary-action">
-      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${i}">
-        <input type="checkbox" id="list-checkbox-${i}" class="mdl-checkbox__input" />
+      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${key}">
+        <input type="checkbox" id="list-checkbox-${key}" class="mdl-checkbox__input" onclick="checkbox('list-checkbox-${key}','list-item-${key}')"/>
       </label>
     </span>
   </li>
 `;
+
+console.log(document.getElementById("list-item-" + key))
 }
 
 //Artikel einfügen
@@ -65,10 +96,15 @@ function addShoppinglist(){
             Preis: price_field.value
         }),
         headers:{
-            "Content-type": "application/json; charset= UTF-8"
+            "Content-type": "application/json; charset= UTF-8",
+            "Accept": "application/json; charset= UTF-8"
         }
+    })
+    .then(response => response.json())
+    .then((data) =>{
+        var entrys = data;
+            add(entrys,entrys.article);
     });
-
     //Textfeld wird geleert
     shoppinglistfield.value =''
     amount_field.value =''

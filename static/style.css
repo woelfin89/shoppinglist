@@ -3,4 +3,7 @@
 }
 .demo-list-control {
     width: 300px;
-} 
+}
+.boxChecked{
+    text-decoration: line-through;
+}

@@ -14,7 +14,17 @@ def start_page():
 @app.route("/add.html")
 def add_page():
     return render_template('add.html')
+@app.route("/entry_list", methods = ['GET'])
+def entry_list():
+    data = {}
 
+    try:
+        with open ("sample.json", "r") as file:
+            data = json.load(file)
+    except Exception as err:
+        print(err)
+
+    return data
 @app.route("/add_entry", methods = ['POST'])
 def add_entry():
     e=request.json
@@ -23,6 +33,7 @@ def add_entry():
     entry.article = e['Artikel']
     entry.amount = e['Menge']
     entry.price = e['Preis']
+    entry.checked = False
 
     data = {}
     #json file wird geladen
@@ -40,6 +51,29 @@ def add_entry():
     with open("sample.json", "w") as outfile:
         json.dump(data,outfile, indent=2)
 
-    return " "
+    return json.dumps(entry.__dict__)
+
+@app.route("/update", methods = ['POST'])
+def update():
+    e = request.json
+
+    entry = Entry()
+    entry.article = e['Artikel']
+    entry.amount = e['Menge']
+    entry.price = e['Preis']
+    entry.checked = e['Checkbox']
+
+    data = {}
+    # json file wird geladen
+    try:
+        with open("sample.json", "r") as file:
+            data = json.load(file)
+    except Exception as err:
+        print(err)
+    data[entry.article] = entry.__dict__
+    with open("sample.json", "w") as outfile:
+        json.dump(data,outfile, indent=2)
+
+    return json.dumps(entry.__dict__)
 
 app.run(threaded=True, host='0.0.0.0')
