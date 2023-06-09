@@ -20,7 +20,7 @@ function loadShoppinglist(key){
 }
 
 
-
+//Checkbox updatet daten von Server
 function processCheckbox(checkboxID, listItemID){
     console.log(checkboxID)
     console.log(listItemID)
@@ -28,24 +28,35 @@ function processCheckbox(checkboxID, listItemID){
   var checkbox = document.getElementById(checkboxID);
   var listItem = document.getElementById(listItemID)
 
-  console.log(boxstate)
-  console.log(checkbox)
-  console.log(listItem)
+  var valuePrice = listItem.childNodes[7].innerText;
+  var valueArticle = listItem.childNodes[3].innerText;
+  var valueAmount = listItem.childNodes[5].innerText
 
-    listItem.classList.add("boxChecked");
     fetch("/update", {
         method: "POST",
         body: JSON.stringify({
-            Artikel: shoppinglistfield.value,
-            Menge: amount_field.value,
-            Preis: price_field.value,
+            Artikel: valueArticle,
+            Menge: valueAmount,
+            Preis: valuePrice,
             Checkbox: boxstate
         }),
         headers:{
             "Content-type": "application/json; charset= UTF-8",
         }
     })
+   if(boxstate == true)
+   {
+        listItem.style.textDecoration = 'line-through';
+   }
+   else
+   {
+        listItem.style.textDecoration = 'none';
+   }
+   console.log(valueArticle)
+   console.log(valueAmount)
+   console.log(valuePrice)
 }
+
 
 //Liste Browser erzeugen
 function add(value,key){
@@ -58,13 +69,14 @@ function add(value,key){
   <li class="mdl-list__item" id="list-item-${key}">
     <span class="mdl-list__item-primary-content">
       <i class="material-icons  mdl-list__item-avatar">label</i>
-      ${value.article}
-      <span class="mdl-list__item-primary-content">
+    </span>
+    <span class="mdl-list__item-primary-content">
+       ${value.article}
     </span>
     <span class="mdl-list__item-primary-content">
       ${value.amount}
     </span>
-        <span class="mdl-list__item-primary-content">
+    <span class="mdl-list__item-primary-content">
       ${value.price}
     </span>
     <span class="mdl-list__item-secondary-action">

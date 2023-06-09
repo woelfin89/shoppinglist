@@ -2,8 +2,8 @@
   "": {
     "article": "",
     "amount": "",
-    "checked": true,
-    "price": ""
+    "checked": false,
+    "price": {}
   },
   "test": {
     "article": "test",
@@ -20,7 +20,7 @@
   "a": {
     "article": "a",
     "amount": "2",
-    "checked": null,
+    "checked": false,
     "price": "33"
   },
   "aktuell": {
