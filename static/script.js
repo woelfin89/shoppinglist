@@ -17,29 +17,22 @@ function loadShoppinglist(key){
             add(value, key);
         })
     });
-
-  //var list = document.getElementById("shoppinglist");
-  //console.log(list);
-  //for (var i = 0, len=saveShoppinglist.length; i<len; i++){
-  //  var key = saveShoppinglist[i];
-    
-  //  add(key,i);
-  //}
-  localStorage.clear()
 }
 
 
 
-function checkbox(key, boxinhalt){
-    console.log(key)
-  var boxstate = document.getElementById(key).checked;
-  var boxitem = document.getElementById(key);
-  var inhalt = document.getElementById(boxinhalt)
+function processCheckbox(checkboxID, listItemID){
+    console.log(checkboxID)
+    console.log(listItemID)
+  var boxstate = document.getElementById(checkboxID).checked;
+  var checkbox = document.getElementById(checkboxID);
+  var listItem = document.getElementById(listItemID)
 
   console.log(boxstate)
-  console.log(inhalt)
+  console.log(checkbox)
+  console.log(listItem)
 
-    inhalt.classList.add("boxChecked");
+    listItem.classList.add("boxChecked");
     fetch("/update", {
         method: "POST",
         body: JSON.stringify({
@@ -76,7 +69,7 @@ function add(value,key){
     </span>
     <span class="mdl-list__item-secondary-action">
       <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-${key}">
-        <input type="checkbox" id="list-checkbox-${key}" class="mdl-checkbox__input" onclick="checkbox('list-checkbox-${key}','list-item-${key}')"/>
+        <input type="checkbox" id="list-checkbox-${key}" class="mdl-checkbox__input" onclick="processCheckbox('list-checkbox-${key}','list-item-${key}')"/>
       </label>
     </span>
   </li>
