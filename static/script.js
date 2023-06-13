@@ -116,8 +116,43 @@ function addShoppinglist(){
     price_field.value ='';
 }
 
-/*function save(){
-  localStorage.setItem('ShoppinglistData', //wird im localStorage unter "ShoppinglistData" gespeichert
-  JSON.stringify(saveShoppinglist)  //Variable wird in String im JSON-Format umgewandelt
-);
-}*/
+function deletefunction(){
+    var shoppinglist = document.getElementById("shoppinglist")
+        //console.log(shoppinglist)
+
+    var checkedBoxes = shoppinglist.querySelectorAll('input[type="checkbox"]:checked');
+    checkedBoxes.forEach(function(checkbox) {
+        var parentElement = checkbox.parentNode;
+        //parentElement.parentNode.removeChild(parentElement);
+
+        var listItem = parentElement.parentNode.parentNode;
+        console.log(listItem)
+        var valuePrice = listItem.childNodes[7].innerText;
+        var valueArticle = listItem.childNodes[3].innerText;
+        var valueAmount = listItem.childNodes[5].innerText
+
+        fetch("/delete", {
+            method: "POST",
+            body: JSON.stringify({
+                Artikel: valueArticle,
+                Menge: valueAmount,
+                Preis: valuePrice,
+               }),
+            headers:{
+                "Content-type": "application/json; charset= UTF-8",
+            }
+        })
+        .then(response => response.json())
+        .then((data) =>{
+            listItem.remove();
+
+        });
+    });
+
+    /*remainingItems.forEach(function(item) {
+        console.log(item);
+    // Weitere Aktionen mit den verbleibenden Kindelementen durchführen
+    });*/
+    // update db server
+
+}

@@ -1,38 +1,20 @@
 {
-  "": {
-    "article": "",
+  "d": {
+    "article": "d",
     "amount": "",
-    "checked": false,
-    "price": {}
+    "checked": true,
+    "price": ""
   },
-  "test": {
-    "article": "test",
-    "amount": "a",
-    "checked": null,
-    "price": "33"
-  },
-  "g": {
-    "article": "g",
-    "amount": "5",
-    "checked": null,
-    "price": "3354353"
+  "dfwa": {
+    "article": "dfwa",
+    "amount": "",
+    "checked": true,
+    "price": ""
   },
   "a": {
     "article": "a",
-    "amount": "2",
+    "amount": "",
     "checked": false,
-    "price": "33"
-  },
-  "aktuell": {
-    "article": "aktuell",
-    "amount": "5",
-    "checked": null,
-    "price": "3354353"
-  },
-  "test2": {
-    "article": "test2",
-    "amount": "7",
-    "checked": null,
-    "price": "100"
+    "price": ""
   }
 }

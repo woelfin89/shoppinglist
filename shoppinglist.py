@@ -76,4 +76,31 @@ def update():
 
     return json.dumps(entry.__dict__)
 
+@app.route("/delete", methods = ['POST'])
+def delete():
+    e = request.json
+
+    entry = Entry()
+    entry.article = e['Artikel']
+    entry.amount = e['Menge']
+    entry.price = e['Preis']
+
+    data = {}
+    print(entry.article)
+    # JSON-Datei öffnen und den Inhalt laden
+    try:
+        with open("sample.json", "r") as file:
+            data = json.load(file)
+    except Exception as err:
+        print(err)
+    # Löschung Inhalt
+    if entry.article in data:
+        del data[entry.article]
+
+    # Aktualisierte Daten in die JSON-Datei speichern
+    with open("sample.json", "w") as outfile:
+        json.dump(data,outfile, indent=2)
+
+    return json.dumps(entry.__dict__)
+
 app.run(threaded=True, host='0.0.0.0')
