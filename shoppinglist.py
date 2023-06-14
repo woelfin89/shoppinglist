@@ -5,6 +5,15 @@ import json
 
 #instanzieren der Klasse mit argument für Module/Packete, app variable
 app = Flask(__name__)
+
+data = {}
+# JSON-Datei öffnen und den Inhalt laden
+try:
+    with open("sample.json", "r") as file:
+        data = json.load(file)
+except Exception as err:
+    print(err)
+
 #welche URL die funktion aufruft, mit / ladet man im root verzeichnis
 @app.route("/")
 #Funktion
@@ -14,17 +23,11 @@ def start_page():
 @app.route("/add.html")
 def add_page():
     return render_template('add.html')
+
 @app.route("/entry_list", methods = ['GET'])
 def entry_list():
-    data = {}
-
-    try:
-        with open ("sample.json", "r") as file:
-            data = json.load(file)
-    except Exception as err:
-        print(err)
-
     return data
+
 @app.route("/add_entry", methods = ['POST'])
 def add_entry():
     e=request.json
@@ -35,18 +38,9 @@ def add_entry():
     entry.price = e['Preis']
     entry.checked = False
 
-    data = {}
-    #json file wird geladen
-    try:
-        with open ("sample.json", "r") as file:
-            data = json.load(file)
-    except Exception as err:
-        print(err)
     data[entry.article] = entry.__dict__
 
     # ein Objekt der Klasse Entry wird erzeugt aus dem Daten des Webbrowsers
-
-    print(entry.article,entry.amount,entry.price)
 
     with open("sample.json", "w") as outfile:
         json.dump(data,outfile, indent=2)
@@ -63,13 +57,6 @@ def update():
     entry.price = e['Preis']
     entry.checked = e['Checkbox']
 
-    data = {}
-    # json file wird geladen
-    try:
-        with open("sample.json", "r") as file:
-            data = json.load(file)
-    except Exception as err:
-        print(err)
     data[entry.article] = entry.__dict__
     with open("sample.json", "w") as outfile:
         json.dump(data,outfile, indent=2)
@@ -85,14 +72,6 @@ def delete():
     entry.amount = e['Menge']
     entry.price = e['Preis']
 
-    data = {}
-    print(entry.article)
-    # JSON-Datei öffnen und den Inhalt laden
-    try:
-        with open("sample.json", "r") as file:
-            data = json.load(file)
-    except Exception as err:
-        print(err)
     # Löschung Inhalt
     if entry.article in data:
         del data[entry.article]
