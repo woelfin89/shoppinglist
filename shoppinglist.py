@@ -18,7 +18,7 @@ except Exception as err:
 @app.route("/")
 #Funktion
 def start_page():
-    return render_template('index.html')
+    return render_template('add.html')
 
 @app.route("/add.html")
 def add_page():
