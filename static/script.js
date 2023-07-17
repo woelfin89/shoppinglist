@@ -67,16 +67,13 @@ function add(value,key){
   }
   shoppinglist.innerHTML +=`
   <li class="mdl-list__item" id="list-item-${key}">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons  mdl-list__item-avatar">label</i>
-    </span>
-    <span class="mdl-list__item-primary-content">
+    <span class="mdl-textfield mdl-textfield--align-left" >
        ${value.article}
     </span>
-    <span class="mdl-list__item-primary-content">
+    <span class="mdl-textfield mdl-textfield--align-right">
       ${value.amount}
     </span>
-    <span class="mdl-list__item-primary-content">
+    <span class="mdl-textfield mdl-textfield--align-right">
       ${value.price}
     </span>
     <span class="mdl-list__item-secondary-action">
