@@ -28,9 +28,9 @@ function processCheckbox(checkboxID, listItemID){
   var checkbox = document.getElementById(checkboxID);
   var listItem = document.getElementById(listItemID)
 
-  var valuePrice = listItem.childNodes[7].innerText;
-  var valueArticle = listItem.childNodes[3].innerText;
-  var valueAmount = listItem.childNodes[5].innerText
+  var valuePrice = listItem.childNodes[5].innerText;
+  var valueArticle = listItem.childNodes[1].innerText;
+  var valueAmount = listItem.childNodes[3].innerText;
 
     fetch("/update", {
         method: "POST",
@@ -52,9 +52,6 @@ function processCheckbox(checkboxID, listItemID){
    {
         listItem.style.textDecoration = 'none';
    }
-   console.log(valueArticle)
-   console.log(valueAmount)
-   console.log(valuePrice)
 }
 
 
@@ -123,10 +120,9 @@ function deletefunction(){
         //parentElement.parentNode.removeChild(parentElement);
 
         var listItem = parentElement.parentNode.parentNode;
-        console.log(listItem)
-        var valuePrice = listItem.childNodes[7].innerText;
-        var valueArticle = listItem.childNodes[3].innerText;
-        var valueAmount = listItem.childNodes[5].innerText
+        var valuePrice = listItem.childNodes[5].innerText;
+        var valueArticle = listItem.childNodes[1].innerText;
+        var valueAmount = listItem.childNodes[3].innerText;
 
         fetch("/delete", {
             method: "POST",

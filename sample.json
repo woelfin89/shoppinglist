@@ -1,14 +1,14 @@
 {
-  "test": {
-    "article": "test",
-    "amount": "2",
-    "checked": false,
-    "price": "33"
+  "3354353": {
+    "article": "3354353",
+    "amount": "",
+    "checked": true,
+    "price": ""
   },
-  "a": {
-    "article": "a",
-    "amount": "2",
-    "checked": false,
-    "price": "3354353"
+  "2": {
+    "article": "2",
+    "amount": "33",
+    "checked": true,
+    "price": ""
   }
 }
